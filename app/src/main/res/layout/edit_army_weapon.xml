@@ -1,0 +1,456 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="weaponPoints"
+            type="String" />
+        <variable
+            name="weaponPower"
+            type="String" />
+        <variable
+            name="weaponName"
+            type="String" />
+        <variable
+            name="weaponRange"
+            type="String" />
+        <variable
+            name="weaponType"
+            type="String" />
+        <variable
+            name="weaponStrength"
+            type="String" />
+        <variable
+            name="weaponPenetration"
+            type="String" />
+        <variable
+            name="weaponDamage"
+            type="String" />
+        <variable
+            name="weaponDescription"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <!--LinearLayout
+            android:id="@+id/edit_ui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/edit_ui_left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/edit_ui_points"
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp"
+                    android:gravity="start|center_vertical"
+                    android:layout_gravity="start"
+                    app:layout_constraintTop_toBottomOf="@id/edit_ui"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@{`PTS: ` + weaponPoints}"
+                    android:textSize="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/edit_ui_power"
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp"
+                    android:gravity="start|center_vertical"
+                    android:layout_gravity="start"
+                    app:layout_constraintTop_toBottomOf="@id/edit_ui"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@{`PWR: ` + weaponPower}"
+                    android:textSize="12dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/edit_ui_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/edit_ui_add_disable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_add_circle_grey_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_add_circle_green_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_remove_disable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_remove_circle_grey_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_remove_circle_red_24dp"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/edit_ui_cancel_disable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_cancel_grey_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_cancel_blue_24dp"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout-->
+
+        <TextView
+            android:id="@+id/item_weapon_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent=".30"
+            android:text="@{weaponName ?? ``}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_weapon_range"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_weapon_name"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{weaponRange ?? `R`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_weapon_type"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_weapon_range"
+            app:layout_constraintWidth_percent=".12"
+            android:text="@{weaponType ?? `TYPE`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_weapon_s"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_weapon_type"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{weaponStrength ?? `S`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_weapon_ap"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_weapon_s"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{weaponPenetration ?? `AP`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_weapon_d"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_weapon_ap"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{weaponDamage ?? `D`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_weapon_abilities"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@+id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_weapon_d"
+            app:layout_constraintWidth_percent=".30"
+            android:text="@{weaponDescription ?? ``}"
+            android:textSize="10dp"
+            />
+
+        <!--androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weapon_alt_1"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/item_weapon_abilities"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/item_weapon_name_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".30"
+                android:text="@{weaponName2 ?? ``}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_range_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_name_alt_1"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponRange2 ?? `R`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_type_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_range_alt_1"
+                app:layout_constraintWidth_percent=".12"
+                android:text="@{weaponType2 ?? `TYPE`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_s_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_type_alt_1"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponStrength2 ?? `S`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_ap_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_s_alt_1"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponPenetration2 ?? `AP`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_d_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_ap_alt_1"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponDamage2 ?? `D`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_abilities_alt_1"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_d_alt_1"
+                app:layout_constraintWidth_percent=".30"
+                android:text="@{weaponDescription2 ?? ``}"
+                android:textSize="10dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout-->
+
+        <!--androidx.constraintlayout.widget.ConstraintLayout
+            android:id="@+id/weapon_alt_2"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            app:layout_constraintTop_toBottomOf="@id/weapon_alt_1"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent"
+            android:visibility="gone">
+
+            <TextView
+                android:id="@+id/item_weapon_name_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toStartOf="parent"
+                app:layout_constraintWidth_percent=".30"
+                android:text="@{weaponName3 ?? ``}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_range_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_name_alt_2"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponRange3 ?? `R`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_type_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_range_alt_2"
+                app:layout_constraintWidth_percent=".12"
+                android:text="@{weaponType3 ?? `TYPE`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_s_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_type_alt_2"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponStrength3 ?? `S`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_ap_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_s_alt_2"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponPenetration3 ?? `AP`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_d_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_ap_alt_2"
+                app:layout_constraintWidth_percent=".07"
+                android:text="@{weaponDamage3 ?? `D`}"
+                android:textSize="10dp"
+                />
+
+            <TextView
+                android:id="@+id/item_weapon_abilities_alt_2"
+                android:layout_width="0dp"
+                android:layout_height="wrap_content"
+                android:padding="5dp"
+                android:gravity="center"
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintStart_toEndOf="@id/item_weapon_d_alt_2"
+                app:layout_constraintWidth_percent=".30"
+                android:text="@{weaponDescription3 ?? ``}"
+                android:textSize="10dp"
+                />
+
+        </androidx.constraintlayout.widget.ConstraintLayout-->
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

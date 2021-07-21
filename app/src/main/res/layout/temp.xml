@@ -1,0 +1,300 @@
+<?xml version="1.0" encoding="utf-8"?>
+
+<layout
+    xmlns:android="http://schemas.android.com/apk/res/android">
+
+    <data>
+        <variable
+            name="modelPoints"
+            type="String" />
+        <variable
+            name="modelPower"
+            type="String" />
+        <variable
+            name="modelName"
+            type="String" />
+        <variable
+            name="modelMove"
+            type="String" />
+        <variable
+            name="modelWeapon"
+            type="String" />
+        <variable
+            name="modelBallistic"
+            type="String" />
+        <variable
+            name="modelStrength"
+            type="String" />
+        <variable
+            name="modelToughness"
+            type="String" />
+        <variable
+            name="modelWounds"
+            type="String" />
+        <variable
+            name="modelAttacks"
+            type="String" />
+        <variable
+            name="modelLeadership"
+            type="String" />
+        <variable
+            name="modelSave"
+            type="String" />
+    </data>
+
+    <androidx.constraintlayout.widget.ConstraintLayout
+        android:layout_width="match_parent"
+        android:layout_height="match_parent"
+        xmlns:app="http://schemas.android.com/apk/res-auto">
+
+        <LinearLayout
+            android:id="@+id/edit_ui"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal"
+            app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintEnd_toEndOf="parent">
+
+            <LinearLayout
+                android:id="@+id/edit_ui_left"
+                android:layout_width="wrap_content"
+                android:layout_height="match_parent"
+                android:orientation="horizontal"
+                android:gravity="left"
+                android:layout_weight="1">
+
+                <TextView
+                    android:id="@+id/edit_ui_points"
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp"
+                    android:gravity="start|center_vertical"
+                    android:layout_gravity="start"
+                    app:layout_constraintTop_toBottomOf="@id/edit_ui"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@{`PTS: ` + modelPoints}"
+                    android:textSize="12dp"
+                    />
+
+                <TextView
+                    android:id="@+id/edit_ui_power"
+                    android:layout_width="65dp"
+                    android:layout_height="match_parent"
+                    android:paddingHorizontal="5dp"
+                    android:gravity="start|center_vertical"
+                    android:layout_gravity="start"
+                    app:layout_constraintTop_toBottomOf="@id/edit_ui"
+                    app:layout_constraintStart_toStartOf="parent"
+                    app:layout_constraintEnd_toEndOf="parent"
+                    android:text="@{`PWR: ` + modelPower}"
+                    android:textSize="12dp"
+                    />
+
+            </LinearLayout>
+
+            <LinearLayout
+                android:id="@+id/edit_ui_right"
+                android:layout_width="wrap_content"
+                android:layout_height="wrap_content"
+                android:orientation="horizontal"
+                android:gravity="right"
+                android:layout_weight="1">
+
+                <ImageView
+                    android:id="@+id/edit_ui_add_disable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_add_circle_grey_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_add"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_add_circle_green_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_remove_disable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_remove_circle_grey_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_remove"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_remove_circle_red_24dp"
+                    android:visibility="gone"
+                    />
+                <ImageView
+                    android:id="@+id/edit_ui_cancel_disable"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_cancel_grey_24dp"
+                    android:visibility="gone"
+                    />
+
+                <ImageView
+                    android:id="@+id/edit_ui_cancel"
+                    android:layout_width="wrap_content"
+                    android:layout_height="wrap_content"
+                    android:padding="1dp"
+                    android:layout_gravity="right"
+                    android:src="@drawable/ic_cancel_blue_24dp"
+                    android:visibility="gone"
+                    />
+
+            </LinearLayout>
+
+        </LinearLayout>
+
+        <TextView
+            android:id="@+id/item_unit_name"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toStartOf="parent"
+            app:layout_constraintWidth_percent=".29"
+            android:text="@{modelName ?? `NAME`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_m"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_name"
+            app:layout_constraintWidth_percent=".09"
+            android:text="@{modelMove ?? `M`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_ws"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_m"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{modelWeapon ?? `WS`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_bs"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_ws"
+            app:layout_constraintWidth_percent=".08"
+            android:text="@{modelBallistic ?? `BS`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_s"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_bs"
+            app:layout_constraintWidth_percent=".06"
+            android:text="@{modelStrength ?? `S`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_t"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_s"
+            app:layout_constraintWidth_percent=".06"
+            android:text="@{modelToughness ?? `T`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_w"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_t"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{modelWounds ?? `W`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_a"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_w"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{modelAttacks ?? `A`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_ld"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_a"
+            app:layout_constraintWidth_percent=".07"
+            android:text="@{modelLeadership ?? `LD`}"
+            android:textSize="10dp"
+            />
+
+        <TextView
+            android:id="@+id/item_unit_save"
+            android:layout_width="0dp"
+            android:layout_height="wrap_content"
+            android:padding="5dp"
+            android:gravity="center"
+            app:layout_constraintTop_toBottomOf="@id/edit_ui"
+            app:layout_constraintStart_toEndOf="@id/item_unit_ld"
+            app:layout_constraintWidth_percent=".14"
+            android:text="@{modelSave ?? `SAVE`}"
+            android:textSize="10dp"
+            />
+
+    </androidx.constraintlayout.widget.ConstraintLayout>
+
+</layout>

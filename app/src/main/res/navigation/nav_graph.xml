@@ -1,0 +1,64 @@
+<?xml version="1.0" encoding="utf-8"?>
+<navigation xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:app="http://schemas.android.com/apk/res-auto"
+    xmlns:tools="http://schemas.android.com/tools"
+    android:id="@+id/nav_graph"
+    app:startDestination="@id/homeFragment">
+
+    <fragment
+        android:id="@+id/homeFragment"
+        android:name="com.mnb.crusadeapp.view.HomeFragment"
+        android:label="HomeFragment" >
+        <action
+            android:id="@+id/action_homeFragment_to_editArmyFragment"
+            app:destination="@id/editArmyFragment" />
+    </fragment>
+    <fragment
+        android:id="@+id/editArmyFragment"
+        android:name="com.mnb.crusadeapp.view.EditArmyFragment"
+        android:label="edit_army_fragment"
+        tools:layout="@layout/edit_army_fragment" >
+        <action
+            android:id="@+id/action_editArmyFragment_to_editUnitFragment"
+            app:destination="@id/editUnitFragment" />
+        <argument
+            android:name="codex_param"
+            app:argType="string" />
+        <argument
+            android:name="army_param"
+            app:argType="string" />
+        <argument
+            android:name="action_param"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editUnitFragment"
+        android:name="com.mnb.crusadeapp.view.EditUnitFragment"
+        android:label="edit_unit_fragment"
+        tools:layout="@layout/edit_unit_fragment" >
+        <action
+            android:id="@+id/action_editUnitFragment_to_editModelFragment"
+            app:destination="@id/editModelFragment" />
+        <argument
+            android:name="codex_param"
+            app:argType="string" />
+        <argument
+            android:name="army_param"
+            app:argType="string" />
+        <argument
+            android:name="unit_param"
+            app:argType="string" />
+        <argument
+            android:name="action_param"
+            app:argType="string" />
+    </fragment>
+    <fragment
+        android:id="@+id/editModelFragment"
+        android:name="com.mnb.crusadeapp.view.EditModelFragment"
+        android:label="edit_model_fragment"
+        tools:layout="@layout/edit_model_fragment" >
+        <argument
+            android:name="model_param"
+            app:argType="string" />
+    </fragment>
+</navigation>
