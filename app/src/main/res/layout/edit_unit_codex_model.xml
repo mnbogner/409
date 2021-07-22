@@ -49,8 +49,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/codex_model_pwr_pts"
             app:layout_constraintEnd_toStartOf="@id/codex_model_remove"
-            android:src="@drawable/ic_add_circle_green_24dp"
-            />
+            android:src="@drawable/ic_add_circle_green_24dp"/>
 
         <ImageView
             android:id="@+id/codex_model_remove"
@@ -61,8 +60,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/codex_model_add"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_remove_circle_red_24dp"
-            />
+            android:src="@drawable/ic_remove_circle_red_24dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

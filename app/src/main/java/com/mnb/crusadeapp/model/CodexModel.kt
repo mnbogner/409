@@ -1,7 +1,6 @@
 package com.mnb.crusadeapp.model
 
 import android.content.Context
-import android.os.Environment
 import android.util.Log
 import com.google.gson.Gson
 import com.mnb.crusadeapp.data.*
@@ -30,7 +29,6 @@ class CodexModel() {
             if (it != null) {
                 var gson: Gson = Gson()
 
-                //val codexFile: File = File(it.applicationContext.filesDir, codexName + ".json")
                 val codexFile: File = File(it.getExternalFilesDir(null), codexName + ".json")
 
                 val codexReader: BufferedReader = codexFile.bufferedReader()
@@ -43,23 +41,6 @@ class CodexModel() {
             }
         }
     }
-
-    /*
-    fun saveCodex(context: Context) {
-        codex.let {
-            if (it != null) {
-                // save codex
-                var gson: Gson = Gson()
-
-                val codexFile: File = File(Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS), it.name + ".json")
-                //val codexFile: File = File(context.getExternalFilesDir(null), it.name + ".json")
-
-                val codexString: String = gson.toJson(codex)
-                codexFile.writeText(codexString)
-            }
-        }
-    }
-    */
 
     fun getCodex(): Codex? {
         return codex

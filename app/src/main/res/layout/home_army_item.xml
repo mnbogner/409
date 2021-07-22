@@ -37,8 +37,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/army_item_name"
             app:layout_constraintEnd_toStartOf="@id/army_item_edit"
-            android:src="@drawable/ic_view_grey_24dp"
-            />
+            android:src="@drawable/ic_view_grey_24dp"/>
 
         <ImageView
             android:id="@+id/army_item_edit"
@@ -49,8 +48,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/army_item_view"
             app:layout_constraintEnd_toStartOf="@+id/army_item_delete"
-            android:src="@drawable/ic_edit_grey_24dp"
-            />
+            android:src="@drawable/ic_edit_grey_24dp"/>
 
         <ImageView
             android:id="@+id/army_item_delete"
@@ -61,8 +59,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/army_item_edit"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_delete_grey_24dp"
-            />
+            android:src="@drawable/ic_delete_grey_24dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

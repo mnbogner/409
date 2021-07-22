@@ -1,7 +1,6 @@
 package com.mnb.crusadeapp.model
 
 import android.content.Context
-import android.os.Environment
 import android.util.Log
 import com.google.gson.Gson
 import com.mnb.crusadeapp.data.*
@@ -42,7 +41,6 @@ class ArmyModel() {
             if (it != null) {
                 var gson: Gson = Gson()
 
-                //val armyFile: File = File(it.applicationContext.filesDir, armyName + ".json")
                 val armyFile: File = File(it.getExternalFilesDir(null), armyName + ".json")
 
                 val armyReader: BufferedReader = armyFile.bufferedReader()
@@ -72,7 +70,6 @@ class ArmyModel() {
 
                 Log.d(TAG, "SAVING ${baseName}.json")
 
-                //val armyFile: File = File(it.applicationContext.filesDir, armyName + ".json")
                 val armyFile: File = File(it.getExternalFilesDir(null), "${baseName}.json")
 
                 val armyJson: String = gson.toJson(army)
@@ -90,7 +87,6 @@ class ArmyModel() {
 
                 Log.d(TAG, "DELETING ${armyName}.json")
 
-                //val armyFile: File = File(it.applicationContext.filesDir, armyName + ".json")
                 val armyFile: File = File(it.getExternalFilesDir(null), "${armyName}.json")
 
                 if (armyFile != null && armyFile.exists()) {

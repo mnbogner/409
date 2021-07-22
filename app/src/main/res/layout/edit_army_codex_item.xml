@@ -50,8 +50,7 @@
             app:layout_constraintBottom_toBottomOf="parent"
             app:layout_constraintStart_toEndOf="@id/codex_item_pwr_pts"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_add_circle_blue_24dp"
-            />
+            android:src="@drawable/ic_add_circle_blue_24dp"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
 

@@ -36,9 +36,6 @@
         android:name="com.mnb.crusadeapp.view.EditUnitFragment"
         android:label="edit_unit_fragment"
         tools:layout="@layout/edit_unit_fragment" >
-        <action
-            android:id="@+id/action_editUnitFragment_to_editModelFragment"
-            app:destination="@id/editModelFragment" />
         <argument
             android:name="codex_param"
             app:argType="string" />
@@ -50,15 +47,6 @@
             app:argType="string" />
         <argument
             android:name="action_param"
-            app:argType="string" />
-    </fragment>
-    <fragment
-        android:id="@+id/editModelFragment"
-        android:name="com.mnb.crusadeapp.view.EditModelFragment"
-        android:label="edit_model_fragment"
-        tools:layout="@layout/edit_model_fragment" >
-        <argument
-            android:name="model_param"
             app:argType="string" />
     </fragment>
 </navigation>

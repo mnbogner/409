@@ -31,7 +31,6 @@ class ArmyViewModel() : ViewModel() {
             if (it != null) {
                 Log.d(TAG, "REFRESH ARMY")
                 armyData.postValue(it)
-                //armyData.value = it
             } else {
                 Log.d(TAG, "NO ARMY DATA TO REFRESH")
             }
@@ -79,7 +78,6 @@ class ArmyViewModel() : ViewModel() {
         Log.d(TAG, "LOAD ARMY LIST")
 
         val dir = context?.applicationContext?.getExternalFilesDir(null)
-        //val dir = context?.applicationContext?.filesDir
         if (dir != null && dir.exists()) {
 
             // get json codex files
@@ -98,13 +96,6 @@ class ArmyViewModel() : ViewModel() {
         } else {
             System.out.println("OOPS - " + " directory " + dir?.getPath() + " does not exist");
         }
-
-        /*
-        viewModelScope.launch(Dispatchers.IO) {
-            codexModel.loadCodex(context, codexName)
-            refreshData()
-        }
-        */
     }
 
     fun addUnitToArmy(unit: Unit) {

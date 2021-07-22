@@ -2,7 +2,6 @@ package com.mnb.crusadeapp.view
 
 import android.os.Bundle
 import android.util.Log
-import androidx.fragment.app.Fragment
 import android.view.LayoutInflater
 import android.view.View
 import android.view.ViewGroup
@@ -11,9 +10,9 @@ import android.widget.LinearLayout
 import android.widget.TextView
 import androidx.activity.OnBackPressedCallback
 import androidx.constraintlayout.widget.ConstraintLayout
+import androidx.fragment.app.Fragment
 import androidx.fragment.app.activityViewModels
 import androidx.lifecycle.Observer
-import androidx.navigation.Navigation
 import androidx.navigation.fragment.findNavController
 import com.mnb.crusadeapp.R
 import com.mnb.crusadeapp.data.*
@@ -25,10 +24,11 @@ import com.mnb.crusadeapp.viewmodel.ArmyViewModel
 import com.mnb.crusadeapp.viewmodel.CodexViewModel
 
 class EditUnitFragment : Fragment() {
+
     val TAG: String = "EditUnitFragment"
 
-    private var codexParam: String? = null
     private var armyParam: String? = null
+    private var codexParam: String? = null
     private var unitParam: String? = null
     private var actionParam: String? = null
 
@@ -38,12 +38,10 @@ class EditUnitFragment : Fragment() {
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
-        codexModel.setContext(context)
         armyModel.setContext(context)
+        codexModel.setContext(context)
         activity?.onBackPressedDispatcher?.addCallback(this, object : OnBackPressedCallback(true) {
             override fun handleOnBackPressed() {
-                // in here you can do logic when backPress is clicked
-                Log.d(TAG, "BACK PRESSED")
                 if ("view".equals(actionParam)) {
                     Log.d(TAG, "JUST VIEWING, DON'T SAVE")
                 } else {
@@ -52,7 +50,7 @@ class EditUnitFragment : Fragment() {
                         Log.d(TAG, "SAVE ARMY: " + armyName)
                         armyModel.saveArmy()
                     } else {
-                        Log.d(TAG, "CAN'T SAVE, NAME NULL")
+                        Log.d(TAG, "CAN'T SAVE, NAME IS NULL")
                     }
                 }
                 findNavController().popBackStack()
@@ -60,32 +58,19 @@ class EditUnitFragment : Fragment() {
         })
     }
 
-    override fun onCreateView(
-        inflater: LayoutInflater,
-        container: ViewGroup?,
-        savedInstanceState: Bundle?
-    ): View? {
-        // Inflate the layout for this fragment
+    override fun onCreateView(inflater: LayoutInflater, container: ViewGroup?, savedInstanceState: Bundle?): View? {
         return inflater.inflate(R.layout.edit_unit_fragment, container, false)
     }
 
     override fun onViewCreated(view: View, savedInstanceState: Bundle?) {
         super.onViewCreated(view, savedInstanceState)
 
-        codexParam = arguments?.getString("codex_param")
         armyParam = arguments?.getString("army_param")
+        codexParam = arguments?.getString("codex_param")
         unitParam = arguments?.getString("unit_param")
         actionParam = arguments?.getString("action_param")
 
-        for (s: String in requireArguments().keySet()) {
-            Log.d(TAG, "BUNDLE(2): $s")
-        }
-        Log.d(TAG, "ARGUMENTS(2): $codexParam, $armyParam, $unitParam")
-
-        // set up observers
         armyModel.getArmyData().observe(viewLifecycleOwner, Observer<Army> { army ->
-            // Update the UI
-            Log.d(TAG, "ARMY OBSERVER TRIGGERED")
             for (u: Unit in army.units) {
                 Log.d(TAG, "CHECK: ${u.name} / $unitParam")
                 if (unitParam?.equals(u.name) ?: false) {
@@ -94,8 +79,6 @@ class EditUnitFragment : Fragment() {
             }
         })
         codexModel.getCodexData().observe(viewLifecycleOwner, Observer<Codex> { codex ->
-            // Update the UI
-            Log.d(TAG, "CODEX OBSERVER TRIGGERED")
             for (u: Unit in codex.units) {
                 Log.d(TAG, "CHECK: ${u.name} / $unitParam")
                 if (unitParam?.startsWith(u.name) ?: false) {
@@ -104,26 +87,21 @@ class EditUnitFragment : Fragment() {
             }
         })
 
-        // load data
-        codexModel.loadCodex(codexParam ?: "foo")
         armyModel.loadArmy(armyParam ?: "foo")
-
+        codexModel.loadCodex(codexParam ?: "foo")
     }
 
     fun setupUnitLists(unit: Unit, view: View) {
         Log.d(TAG, "SETUP: ${unit.name}")
-
 
         val inflater = activity?.layoutInflater
         val view = view
 
         // bail out if inflater/view aren't available (ie: before onCreateView is called)
         if (inflater == null) {
-            System.out.println(" state observer called, but inflater is null")
             return
         }
         if (view == null) {
-            System.out.println(" state observer called, but view is null")
             return
         }
 
@@ -143,8 +121,7 @@ class EditUnitFragment : Fragment() {
             unitModelLayout.addView(header.root)
 
             for (m: Model in unitModelList) {
-                Log.d(TAG, "ADD ITEM TO unit LIST FOR ${m.name}")
-
+                Log.d(TAG, "ADD ITEM TO UNIT MODEL LIST: ${m.name}")
 
                 val binding = EditArmyModelBinding.inflate(inflater)
                 var nameString = m.name
@@ -164,27 +141,10 @@ class EditUnitFragment : Fragment() {
                 binding.modelLeadership = m.ld
                 binding.modelSave = m.sv
                 unitModelLayout.addView(binding.root)
-
-
-                /*
-                val unitModelItem: View =
-                    layoutInflater.inflate(R.layout.edit_army_codex_unit, null)
-                val unitModelItemName: TextView =
-                    unitModelItem.findViewById(R.id.codex_unit_item_name) as TextView
-                unitModelItemName.text = "${m.name} x${m.count}"
-
-                unitModelItem.setOnClickListener {
-                    Log.d(TAG, "UNIT MODEL CLICK")
-                    armyModel.removeModelFromUnit(unitParam ?: "foo", m)
-                }
-
-                unitModelLayout.addView(unitModelItem)
-                */
             }
         } else {
-            Log.d(TAG, "unit MODEL LIST IS NULL OR EMPTY")
+            Log.d(TAG, "UNIT MODEL LIST IS NULL OR EMPTY")
         }
-
 
         val unitWeaponList: List<Weapon> = unit.weapons.sorted()
         val unitWeaponLayout: LinearLayout =
@@ -192,15 +152,12 @@ class EditUnitFragment : Fragment() {
         unitWeaponLayout.removeAllViews()
         if (unitWeaponList != null && unitWeaponList.isNotEmpty()) {
 
-
             // use item with default values as header row
             val header = EditArmyWeaponBinding.inflate(inflater)
             unitWeaponLayout.addView(header.root)
 
-
             for (w: Weapon in unitWeaponList) {
-                Log.d(TAG, "ADD ITEM TO unit LIST FOR ${w.name}")
-
+                Log.d(TAG, "ADD ITEM TO UNIT WEAPON LIST: ${w.name}")
 
                 val binding = EditArmyWeaponBinding.inflate(inflater)
                 var nameString = w.name
@@ -247,33 +204,18 @@ class EditUnitFragment : Fragment() {
                         unitWeaponLayout.addView(altBinding.root)
                     }
                 }
-
-
-                /*
-                val unitWeaponItem: View =
-                    layoutInflater.inflate(R.layout.edit_army_codex_unit, null)
-                val unitWeaponItemName: TextView =
-                    unitWeaponItem.findViewById(R.id.codex_unit_item_name) as TextView
-                unitWeaponItemName.text = "${w.name} x${w.count}"
-
-                unitWeaponItem.setOnClickListener {
-                    Log.d(TAG, "UNIT WEAPON CLICK")
-                    armyModel.removeWeaponFromUnit(unitParam ?: "foo", w)
-                }
-
-                unitWeaponLayout.addView(unitWeaponItem)
-                */
             }
         } else {
-            Log.d(TAG, "unit WEAPON LIST IS NULL OR EMPTY")
+            Log.d(TAG, "UNIT WEAPON LIST IS NULL OR EMPTY")
         }
+
         val unitAbilityList: List<Ability> = unit.abilities.sorted()
         val unitAbilityLayout: LinearLayout =
             view.findViewById(R.id.unit_ability_list) as LinearLayout
         unitAbilityLayout.removeAllViews()
         if (unitAbilityList != null && unitAbilityList.isNotEmpty()) {
             for (a: Ability in unitAbilityList) {
-                Log.d(TAG, "ADD ITEM TO unit LIST FOR ${a.name}")
+                Log.d(TAG, "ADD ITEM TO UNIT ABILITY LIST: ${a.name}")
 
                 val armyAbilityItem: View = layoutInflater.inflate(R.layout.edit_unit_army_item, null)
                 val armyAbilityItemName: TextView = armyAbilityItem.findViewById(R.id.army_item_name) as TextView
@@ -291,30 +233,16 @@ class EditUnitFragment : Fragment() {
                 val armyAbilityItemText: TextView = armyAbilityItem.findViewById(R.id.army_item_text) as TextView
                 armyAbilityItemText.text = a.description
 
-                /*
-                val unitAbilityItem: View =
-                    layoutInflater.inflate(R.layout.edit_army_codex_unit, null)
-                val unitAbilityItemName: TextView =
-                    unitAbilityItem.findViewById(R.id.codex_unit_item_name) as TextView
-                unitAbilityItemName.text = "${a.name} x${a.count}"
-                */
-
-                /*
-                unitAbilityItem.setOnClickListener {
-                    Log.d(TAG, "UNIT ABILITY CLICK")
-                    armyModel.removeAbilityFromUnit(unitParam ?: "foo", a)
-                }
-                */
-
                 unitAbilityLayout.addView(armyAbilityItem)
             }
         } else {
-            Log.d(TAG, "unit ABILITY LIST IS NULL OR EMPTY")
+            Log.d(TAG, "UNIT ABILITY LIST IS NULL OR EMPTY")
         }
     }
 
     fun setupCodexLists(unit: Unit, view: View) {
         Log.d(TAG, "SETUP: ${unit.name}")
+
         val codexName: TextView = view.findViewById(R.id.codex_name) as TextView
         codexName.text = unit.name
         val codexModelLayout: LinearLayout =
@@ -323,22 +251,13 @@ class EditUnitFragment : Fragment() {
             view.findViewById(R.id.codex_weapon_list) as LinearLayout
         val codexAbilityLayout: LinearLayout =
             view.findViewById(R.id.codex_ability_list) as LinearLayout
+
         if (!"view".equals(actionParam)) {
             val codexModelList: List<Model> = unit.models.sorted()
             if (codexModelList != null && codexModelList.isNotEmpty()) {
                 codexModelLayout.removeAllViews()
                 for (m: Model in codexModelList) {
-                    Log.d(TAG, "ADD ITEM TO CODEX LIST FOR ${m.name}")
-
-                    /*
-                val codexModelItem: View =
-                    layoutInflater.inflate(R.layout.edit_army_codex_unit, null)
-                val codexModelItemName: TextView =
-                    codexModelItem.findViewById(R.id.codex_unit_item_name) as TextView
-                codexModelItemName.text = m.name
-                */
-
-
+                    Log.d(TAG, "ADD ITEM TO CODEX MODEL LIST: ${m.name}")
                     val codexModelItem: View =
                         layoutInflater.inflate(R.layout.edit_unit_codex_model, null)
                     val codexModelItemName: TextView =
@@ -356,45 +275,27 @@ class EditUnitFragment : Fragment() {
                     val codexModelItemAdd: ImageView =
                         codexModelItem.findViewById(R.id.codex_model_add) as ImageView
                     codexModelItemAdd.setOnClickListener {
-                        Log.d(TAG, "CODEX MODEL ADD CLICK")
+                        Log.d(TAG, "MODEL ADD CLICK")
                         armyModel.addModelToUnit(unitParam ?: "foo", m)
                     }
                     val codexModelItemRemove: ImageView =
                         codexModelItem.findViewById(R.id.codex_model_remove) as ImageView
                     codexModelItemRemove.setOnClickListener {
-                        Log.d(TAG, "CODEX MODEL REMOVE CLICK")
+                        Log.d(TAG, "MODEL REMOVE CLICK")
                         armyModel.removeModelFromUnit(unitParam ?: "foo", m)
                     }
-
-                    /*
-                codexModelItem.setOnClickListener {
-                    Log.d(TAG, "CODEX MODEL CLICK")
-                    armyModel.addModelToUnit(unitParam ?: "foo", m)
-                }
-                */
 
                     codexModelLayout.addView(codexModelItem)
                 }
             } else {
                 Log.d(TAG, "CODEX MODEL LIST IS NULL OR EMPTY")
             }
+
             val codexWeaponList: List<Weapon> = unit.weapons.sorted()
             if (codexWeaponList != null && codexWeaponList.isNotEmpty()) {
                 codexWeaponLayout.removeAllViews()
                 for (w: Weapon in codexWeaponList) {
-                    Log.d(TAG, "ADD ITEM TO CODEX LIST FOR ${w.name}")
-
-                    /*
-                val codexWeaponItem: View =
-                    layoutInflater.inflate(R.layout.edit_army_codex_unit, null)
-                val codexWeaponItemName: TextView =
-                    codexWeaponItem.findViewById(R.id.codex_unit_item_name) as TextView
-
-                val shortName = w.name.split(" - ")[0]
-
-                codexWeaponItemName.text = shortName
-                */
-
+                    Log.d(TAG, "ADD ITEM TO CODEX WEAPON LIST: ${w.name}")
 
                     val codexWeaponItem: View =
                         layoutInflater.inflate(R.layout.edit_unit_codex_weapon, null)
@@ -413,22 +314,15 @@ class EditUnitFragment : Fragment() {
                     val codexWeaponItemAdd: ImageView =
                         codexWeaponItem.findViewById(R.id.codex_weapon_add) as ImageView
                     codexWeaponItemAdd.setOnClickListener {
-                        Log.d(TAG, "CODEX WEAPON ADD CLICK")
+                        Log.d(TAG, "WEAPON ADD CLICK")
                         armyModel.addWeaponToUnit(unitParam ?: "foo", w)
                     }
                     val codexWeaponItemRemove: ImageView =
                         codexWeaponItem.findViewById(R.id.codex_weapon_remove) as ImageView
                     codexWeaponItemRemove.setOnClickListener {
-                        Log.d(TAG, "CODEX WEAPON REMOVE CLICK")
+                        Log.d(TAG, "WEAPON REMOVE CLICK")
                         armyModel.removeWeaponFromUnit(unitParam ?: "foo", w)
                     }
-
-                    /*
-                codexWeaponItem.setOnClickListener {
-                    Log.d(TAG, "CODEX WEAPON CLICK")
-                    armyModel.addWeaponToUnit(unitParam ?: "foo", w)
-                }
-                */
 
                     codexWeaponLayout.addView(codexWeaponItem)
                 }
@@ -439,15 +333,7 @@ class EditUnitFragment : Fragment() {
             if (codexAbilityList != null && codexAbilityList.isNotEmpty()) {
                 codexAbilityLayout.removeAllViews()
                 for (a: Ability in codexAbilityList) {
-                    Log.d(TAG, "ADD ITEM TO CODEX LIST FOR ${a.name}")
-
-                    /*
-                val codexAbilityItem: View =
-                    layoutInflater.inflate(R.layout.edit_army_codex_unit, null)
-                val codexAbilityItemName: TextView =
-                    codexAbilityItem.findViewById(R.id.codex_unit_item_name) as TextView
-                codexAbilityItemName.text = a.name
-                */
+                    Log.d(TAG, "ADD ITEM TO CODEX ABILITY LIST: ${a.name}")
 
                     val codexAbilityItem: View =
                         layoutInflater.inflate(R.layout.edit_unit_codex_item, null)
@@ -465,22 +351,15 @@ class EditUnitFragment : Fragment() {
                     val codexAbilityItemAdd: ImageView =
                         codexAbilityItem.findViewById(R.id.codex_item_add) as ImageView
                     codexAbilityItemAdd.setOnClickListener {
-                        Log.d(TAG, "CODEX ABILITY ADD CLICK")
+                        Log.d(TAG, "ABILITY ADD CLICK")
                         armyModel.addAbilityToUnit(unitParam ?: "foo", a)
                     }
                     val codexAbilityItemRemove: ImageView =
                         codexAbilityItem.findViewById(R.id.codex_item_remove) as ImageView
                     codexAbilityItemRemove.setOnClickListener {
-                        Log.d(TAG, "CODEX ABILITY REMOVE CLICK")
+                        Log.d(TAG, "ABILITY REMOVE CLICK")
                         armyModel.removeAbilityFromUnit(unitParam ?: "foo", a)
                     }
-
-                    /*
-                codexAbilityItem.setOnClickListener {
-                    Log.d(TAG, "CODEX ABILITY CLICK")
-                    armyModel.addAbilityToUnit(unitParam ?: "foo", a)
-                }
-                */
 
                     codexAbilityLayout.addView(codexAbilityItem)
                 }

@@ -50,8 +50,7 @@
             app:layout_constraintBottom_toTopOf="@+id/army_item_text"
             app:layout_constraintStart_toEndOf="@id/army_item_pwr_pts"
             app:layout_constraintEnd_toEndOf="parent"
-            android:src="@drawable/ic_cancel_blue_24dp"
-            />
+            android:src="@drawable/ic_cancel_blue_24dp"/>
 
         <TextView
             android:id="@+id/army_item_text"

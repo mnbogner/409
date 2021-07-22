@@ -24,8 +24,6 @@ import com.mnb.crusadeapp.data.Unit
 import com.mnb.crusadeapp.rules.ArmyCalculator
 import com.mnb.crusadeapp.viewmodel.ArmyViewModel
 import com.mnb.crusadeapp.viewmodel.CodexViewModel
-import java.text.SimpleDateFormat
-import java.util.*
 
 class EditArmyFragment : Fragment() {
 
@@ -217,12 +215,6 @@ class EditArmyFragment : Fragment() {
                             armyModel.addUnitToArmy(u)
                         }
 
-                        /*
-                    codexUnitItem.setOnClickListener {
-                        armyModel.addUnitToArmy(u)
-                    }
-                    */
-
                         codexUnitLayout.addView(codexUnitItem)
                     }
                 } else {
@@ -249,12 +241,6 @@ class EditArmyFragment : Fragment() {
                             Log.d(TAG, "ADD ABILITY FROM ARMY LIST: ${a.name}")
                             armyModel.addAbilityToArmy(a)
                         }
-
-                        /*
-                    codexAbilityItem.setOnClickListener {
-                        armyModel.addAbilityToArmy(a)
-                    }
-                    */
 
                         codexAbilityLayout.addView(codexAbilityItem)
                     }

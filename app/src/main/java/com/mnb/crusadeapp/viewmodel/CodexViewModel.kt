@@ -31,7 +31,6 @@ class CodexViewModel() : ViewModel() {
             if (it != null) {
                 Log.d(TAG, "REFRESH CODEX")
                 codexData.postValue(it)
-                //codexData.value = it
             } else {
                 Log.d(TAG, "NO CODEX DATA TO REFRESH")
             }
@@ -59,7 +58,6 @@ class CodexViewModel() : ViewModel() {
 
         // currently looking in download directory for codex files
         val dir = context?.applicationContext?.getExternalFilesDir(null)
-        //val dir = Environment.getExternalStoragePublicDirectory(Environment.DIRECTORY_DOWNLOADS)
         if (dir != null && dir.exists()) {
 
             // get json codex files
@@ -78,13 +76,6 @@ class CodexViewModel() : ViewModel() {
         } else {
             System.out.println("OOPS - " + " directory " + dir?.getPath() + " does not exist");
         }
-
-        /*
-        viewModelScope.launch(Dispatchers.IO) {
-            codexModel.loadCodex(context, codexName)
-            refreshData()
-        }
-        */
     }
 
     fun getUnitFromCodex(unitName: String): Unit? {
