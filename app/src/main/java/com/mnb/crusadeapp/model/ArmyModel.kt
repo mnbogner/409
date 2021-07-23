@@ -104,86 +104,35 @@ class ArmyModel() {
         this.army = army
     }
 
-    fun addUnitToArmy(unit: Unit) {
-        Log.d(TAG, "UNIT: ${unit.name}, ${unit.type}")
+    fun getUnitList(): MutableList<Unit> {
         army.let {
             if (it != null) {
-                val unitList: MutableList<Unit> = it.units.toMutableList()
-                // 3 unit limit
-                var unitNum: Int = 1;
-                while (unitNum <= 3) {
-                    var numOk: Boolean = true
-                    for (u: Unit in unitList) {
-                        if (u.name.startsWith(unit.name) && u.name.endsWith("${unitNum}")) {
-                            Log.d(TAG, "${u.name} ALREADY TAKEN")
-                            numOk = false
-                            break
-                        }
-                    }
-                    if (numOk) {
-                        Log.d(TAG, "NEW UNIT: ${unit.name} ${unitNum}")
-                        val unitCopy: Unit = Unit(
-                            "${unit.name} ${unitNum}",
-                            unit.type,
-                            arrayOf<Model>(),
-                            unit.track,
-                            arrayOf<Weapon>(),
-                            arrayOf<Ability>()
-                        )
-                        unitList.add(unitCopy)
-                        it.units = unitList.toTypedArray()
-                        break
-                    } else {
-                        unitNum++
-                    }
-                }
+                return it.units.toMutableList()
             }
         }
+        return mutableListOf<Unit>()
     }
 
-    fun removeUnitFromArmy(unit: Unit) {
-        Log.d(TAG, "UNIT: ${unit.name}, ${unit.type}")
+    fun setUnitList(unitList: List<Unit>) {
         army.let {
             if (it != null) {
-                val unitList: MutableList<Unit> = it.units.toMutableList()
-                for (u: Unit in it.units) {
-                    if (u.name.equals(unit.name)) {
-                        unitList.remove(u)
-                    }
-                }
                 it.units = unitList.toTypedArray()
             }
         }
     }
 
-    fun addAbilityToArmy(ability: Ability) {
+    fun getAbilityList(): MutableList<Ability> {
         army.let {
             if (it != null) {
-                val abilityList: MutableList<Ability> = it.abilities.toMutableList()
-                for (a: Ability in abilityList) {
-                    if (a.name.equals(ability.name)) {
-                        // army abilities probably shouldn't allow multiples
-                        // a.count++
-                        // it.abilities = abilityList.toTypedArray()
-                        return
-                    }
-                }
-                val abilityCopy: Ability = Ability(ability.name, ability.description, ability.points, ability.power, 1)
-                abilityList.add(abilityCopy)
-                it.abilities = abilityList.toTypedArray()
+                return it.abilities.toMutableList()
             }
         }
+        return mutableListOf<Ability>()
     }
 
-    fun removeAbilityFromArmy(ability: Ability) {
+    fun setAbilityList(abilityList: List<Ability>) {
         army.let {
             if (it != null) {
-                val abilityList: MutableList<Ability> = it.abilities.toMutableList()
-                for (a: Ability in it.abilities) {
-                    if (a.name.equals(ability.name)) {
-                        abilityList.remove(a)
-                    }
-                }
                 it.abilities = abilityList.toTypedArray()
             }
         }

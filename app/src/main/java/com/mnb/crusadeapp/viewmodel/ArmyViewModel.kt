@@ -99,22 +99,93 @@ class ArmyViewModel() : ViewModel() {
     }
 
     fun addUnitToArmy(unit: Unit) {
-        armyModel.addUnitToArmy(unit)
+
+        Log.d(TAG, "UNIT: ${unit.name}, ${unit.type}")
+
+        val unitList: MutableList<Unit> = armyModel.getUnitList()
+        // 3 unit limit
+        var unitNum: Int = 1;
+        while (unitNum <= 3) {
+            var numOk: Boolean = true
+            for (u: Unit in unitList) {
+                if (u.name.startsWith(unit.name) && u.name.endsWith("${unitNum}")) {
+                    Log.d(TAG, "${u.name} ALREADY TAKEN")
+                    numOk = false
+                    break
+                }
+            }
+            if (numOk) {
+                Log.d(TAG, "NEW UNIT: ${unit.name} ${unitNum}")
+                val unitCopy: Unit = Unit(
+                    "${unit.name} ${unitNum}",
+                    unit.type,
+                    arrayOf<Model>(),
+                    unit.track,
+                    arrayOf<Weapon>(),
+                    arrayOf<Ability>()
+                )
+                unitList.add(unitCopy)
+                armyModel.setUnitList(unitList)
+                break
+            } else {
+                unitNum++
+            }
+        }
+
         refreshData()
     }
 
     fun removeUnitFromArmy(unit: Unit) {
-        armyModel.removeUnitFromArmy(unit)
+
+        Log.d(TAG, "UNIT: ${unit.name}, ${unit.type}")
+
+        val unitList: MutableList<Unit> = armyModel.getUnitList()
+        for (u: Unit in unitList) {
+            if (u.name.equals(unit.name)) {
+                unitList.remove(u)
+                armyModel.setUnitList(unitList)
+                break
+            }
+        }
+
         refreshData()
     }
 
     fun addAbilityToArmy(ability: Ability) {
-        armyModel.addAbilityToArmy(ability)
+
+        val abilityList: MutableList<Ability> = armyModel.getAbilityList()
+        for (a: Ability in abilityList) {
+            if (a.name.equals(ability.name)) {
+                // army abilities probably shouldn't allow multiples
+                // a.count++
+                // it.abilities = abilityList.toTypedArray()
+                return
+            }
+        }
+        val abilityCopy: Ability = Ability(
+            ability.name,
+            ability.description,
+            ability.points,
+            ability.power,
+            1
+        )
+        abilityList.add(abilityCopy)
+        armyModel.setAbilityList(abilityList)
+
         refreshData()
     }
 
     fun removeAbilityFromArmy(ability: Ability) {
-        armyModel.removeAbilityFromArmy(ability)
+
+        val abilityList: MutableList<Ability> = armyModel.getAbilityList()
+        for (a: Ability in abilityList) {
+            if (a.name.equals(ability.name)) {
+                abilityList.remove(a)
+                armyModel.setAbilityList(abilityList)
+                break
+            }
+        }
+
         refreshData()
     }
 
